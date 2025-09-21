@@ -1,0 +1,62 @@
+Q1: Why don't we use the class folder name as a label directly? Why is it an array of 10 elements?
+We use one-hot encoding for labels instead of numbers because it prevents the model from assuming any ordinal relationship among classes, aligns with cross-entropy loss expectations, and allows the output to be interpreted as a probability distribution across classes.
+
+Q2: Why convert to numpy array?
+NumPy arrays provide fast vectorized operations, memory efficiency, consistent data types, and essential matrix operations needed for neural network computations.
+
+Q3: Why are we doing X[:, :,:, 0] and what does this slicing result in?
+This slicing removes the color channel dimension, converting images to grayscale and reducing dimensionality while preserving key features.
+
+Q4: Why are we reshaping the data?
+The reshape converts 2D images (28x28) into 1D vectors (784,) so they can be fed into fully connected layers as input features.
+
+Q5: What is the learning rate?
+The learning rate controls the weight update step size during training. Too high leads to unstable training; too low results in slow convergence.
+
+Q6: Why are the dimensions of the weights and biases the way they are?
+Weight dimensions align with layer sizes to enable valid matrix multiplication: input-to-hidden weights are (hidden_neurons, input_neurons), hidden-to-output weights are (output_neurons, hidden_neurons), and biases match their respective neuron counts.
+
+Q7: What is broadcasting and why do we need to broadcast the bias?
+Broadcasting allows NumPy to automatically expand bias vectors so they add efficiently to every sample in a batch without manual replication.
+
+Q8: What is np.random.randn? What's the shape of this matrix?
+np.random.randn draws from normal distribution with mean 0, std 1. Matrices are shaped according to layer sizes, scaled for He initialization to keep training stable.
+
+Q9: What are activation functions and why do we need them?
+Activation functions add non-linearity, enabling the network to learn complex patterns beyond simple linear transformations.
+
+Q10: What is the softmax function and why do we need it?
+Softmax converts raw scores into probabilities that sum to 1, suitable for multi-class classification.
+
+Q11: What are loss functions and why do we need them?
+Loss functions measure prediction error and guide weight updates to improve the model. Cross-entropy is commonly used for classification.
+
+Q12: What does the output size 10 mean?
+The output contains the predicted probability for each of the 10 classes; the largest value corresponds to predicted class.
+
+Q13: Why subtract mean of inputs?
+Centering the inputs around zero improves model convergence and avoids saturation issues.
+
+Q14: Why use softmax in output?
+Softmax ensures outputs form a valid probability distribution across classes.
+
+Q15: Why do a forward pass in backprop?
+Recomputing forward pass during backprop computes intermediate values needed for gradient calculations accurately.
+
+Q16: What is validation dataset and generalization?
+Validation data is unseen during training and used to verify performance on new data, indicating generalization capability of the model.
+
+Q17: What are the model parameters and their meaning?
+
+input_neurons: Number of input features (784 pixels)
+
+hidden_neurons: Number of neurons in the hidden layer
+
+output_neurons: Number of output classes (10)
+
+learning_rate: Step size during weight updates
+
+epochs: Number of training iterations through the dataset
+
+Q18: Why use argmax on predictions?
+Argmax converts predicted class probabilities into discrete class labels by selecting the highest probability as the predicted class.
